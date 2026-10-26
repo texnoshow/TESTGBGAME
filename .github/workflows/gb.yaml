@@ -14,11 +14,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install GBDK-2020
-        run: |
-          wget https://github.com
-          tar -xzf gbdk-linux64.tar.gz
-          echo "$GITHUB_WORKSPACE/gbdk/bin" >> $GITHUB_PATH
+      - name: Set up GBDK-2020
+        uses: jleightcap/setup-gbdk@v1
+        with:
+          version: '4.3.0'
 
       - name: Compile ROM
         run: |
