@@ -14,9 +14,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Compile ROM using GBDK Docker
+      - name: Install GBDK-2020
         run: |
-          docker run --rm -v ${{ github.workspace }}:/src -w /src ghcr.io/gbdk-2020/gbdk-2020:latest lcc -o maze_game.gb main.c
+          wget https://github.com
+          tar -xzf gbdk-linux64.tar.gz
+          echo "$GITHUB_WORKSPACE/gbdk/bin" >> $GITHUB_PATH
+
+      - name: Compile ROM
+        run: |
+          lcc -o maze_game.gb main.c
 
       - name: Upload Game ROM Artifact
         uses: actions/upload-artifact@v4
